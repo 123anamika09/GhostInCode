@@ -1,0 +1,29 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        int[] ans = new int[k];
+        HashMap<Integer,Integer> map  = new HashMap<>();
+        for(int num:nums){
+          map.put( num,map.getOrDefault(num,0)+1);
+        }
+         //pq -> it is a Min Heap (smallest element first).
+         //We want the element with the highest frequency first, so we change the ordering rule.
+         // That rule is written using a lambda comparator:
+         PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->map.get(b) - map.get(a));
+        //   1-> 3 
+        //   2->2
+        //   (2,1)-> maap.get(2) - map.get(1) = -1  
+        // -ve value so 1 comes before 2
+       
+
+
+    //map.get(a) - map.get(b)
+   //This makes a Min Heap, meaning smallest frequency first.
+   
+        pq.addAll(map.keySet()); //add all keys of the HashMap into the PriorityQueue
+        for(int i = 0;i<k;i++){
+            ans[i] = pq.poll();
+        }
+
+       return ans;
+    }
+}
