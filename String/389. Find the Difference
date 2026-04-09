@@ -1,0 +1,29 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        char[] ch =s.toCharArray();
+        char[] c = t.toCharArray();
+        Arrays.sort(ch);
+        Arrays.sort(c);
+        int i = 0;int j = 0;
+        while(i<ch.length && j<c.length){
+            if(ch[i] != c[j]){
+                return c[j];
+            }
+            i++;
+            j++;
+        }
+        return c[c.length-1];
+    }
+}
+
+________________________________________m2___________________________________________
+
+   char res =0;
+        for(char ch :s.toCharArray()){
+            res^=ch;
+        }
+
+        for(char c:t.toCharArray()){
+            res^=c;
+        }
+        return res;
