@@ -1,0 +1,30 @@
+class Solution {
+    public int characterReplacement(String s, int k) {
+         int left = 0;
+         int[] freq = new int[26]; // count freq 
+         int maxfreq = 0;
+         int maxLen = 0;
+          // In Java, characters are stored as ASCII values
+            // ch - 'A' --->> 'A' - 'A' = 0  converts a character into an index (0–25)
+//   char ch = 'B';
+// freq[ch - 'A']++;   
+// o/p freq[1] = count of 'B'
+
+
+         for(int right = 0;right<s.length();right++){
+             char ch = s.charAt(right);
+             freq[ch-'A']++ ; // increase count of character
+             maxfreq = Math.max(maxfreq, freq[ch-'A']);
+
+            //  replacement --> when windowSize -  maxFreq<= k
+           
+             while( right-left+1 - maxfreq>k){
+                //  shrink
+                freq[s.charAt(left) - 'A']--;
+                left++;
+             }
+             maxLen = Math.max(maxLen,right-left+1);
+         }
+         return maxLen;
+    }
+}
