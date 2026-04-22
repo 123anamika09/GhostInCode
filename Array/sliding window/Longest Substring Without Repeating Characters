@@ -1,0 +1,18 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashSet<Character> set = new HashSet<>();
+       int maxLen = 0;
+        
+        int j = 0;
+        for(int i = 0;i<s.length();i++){
+            while(set.contains(s.charAt(i))){
+                set.remove(s.charAt(j)); // shrink --> remove left part if found duplicate
+                j++;
+            }
+            set.add(s.charAt(i));
+            maxLen = Math.max(maxLen,i-j+1); //right-left+1
+        }
+        //  add right remove left concept of sliding window shrinking and expanding
+       return maxLen;
+    }
+}
