@@ -1,0 +1,32 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int n1 = s1.length();
+        int n2 = s2.length();
+        //  we can also used map here to count freq .. b't here size is limited as of 26 so we use array
+        int[] freq = new int[26]; // each character map to index & all are in lowercase,// initial 0 
+        if(n1>n2) return false; // permutation or s1 exists as a substring of s2
+        for(char c1 :s1.toCharArray()){
+            freq[c1-'a']++; // count frequency of s1 character // ascii valu se minus krnee se indeex we get 
+        }
+
+        //  abc k permuation --> abc , bac , acb , ........ 
+        //  if any permutation of permutation present in s2 
+
+        //  s1 = ab  , s2 = eidbaoo now we play on freq 
+        //  in s1 a =1 , b = 1 .... sso we check in s2 is there any substring of length 2 swhich contaains 1 times a & 1 times b by using window
+
+        int left = 0;
+        for(int right = 0;right<n2;right++){
+               freq[s2.charAt(right)-'a']--;
+               while(freq[s2.charAt(right) - 'a'] <0) { //shirnk
+                freq[s2.charAt(left)-'a']++;
+                left++;
+               }
+               if(right-left+1==s1.length()){ //window index <window size
+                     return true;
+               }
+               
+        }
+        return false;
+    }
+}
