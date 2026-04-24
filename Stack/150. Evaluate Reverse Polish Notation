@@ -1,0 +1,33 @@
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> st = new Stack<>();
+
+// Operator always applies to the last two operands (in order)
+// That means:
+// First popped = second operand (b)
+// Second popped = first operand (a) 
+
+        for(String c:tokens){
+              if(c .equals("+")){
+                st.push(st.pop()+st.pop());
+              }
+              else if(c .equals("-")){
+                int a = st.pop(); // order of element should be maintained
+                int b = st.pop();
+               st.push(b-a); // cannot use math.abs 
+              }
+              else if(c .equals  ("*")){
+                st.push(st.pop() * st.pop());
+              } 
+              else if(c .equals("/")){
+                int first = st.pop();
+                int sec = st.pop();
+                    st.push(sec/first); // rev
+                
+              }else {
+                st.push(Integer.parseInt(c)); // string converted to integer
+              }
+    }
+        return st.peek();
+    }
+}
