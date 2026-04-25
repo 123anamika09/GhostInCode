@@ -1,0 +1,47 @@
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        // Monotonic Stack --> either in Increasing order or Desc order 
+        int n = temperatures.length;
+        Stack<Integer> st = new Stack<>(); // to store indx of array as we have to find no of days
+        int[]idx = new int[n];
+        for(int i = 0;i<n;i++){
+            while(!st.isEmpty() && temperatures[i] > temperatures[st.peek()]){ // as in stack index are present
+                //  stack me tvi push krenge jb temp[i] stack k index element se bara jo aur wo monotonic decreasing ho ....
+
+                //  curr stack be like ---
+                //  |_____ |
+                //  | _____|
+                //  | _____|                     res = [ 1, 1 , 0 , 2 , 1 ]
+                //  | __4___| 69
+                //  | _3____| 71 // monotonic decreaing
+                //  | _2____| 75  
+
+
+                //   |_____ |
+                //  | _____|
+                //  | _____|                     res = [ 1, 1 , 4 , 2 , 1 ]
+                //  | _6____| 
+                //  | _5__| 72 pop
+                //  | _2___| 75 
+                int prevIdx = st.pop();
+                idx[prevIdx]  =  i - prevIdx;
+            }
+            st.push(i); // cuurr idx push
+        }
+         return idx;
+
+
+        //  m-2 
+        // int[] res = new int[n];
+        // for(int i = 0;i<n;i++){
+        //     int currTemp = temperatures[i];
+        //     for(int j = i+1;j<n;j++){
+        //         if(currTemp < temperatures[j]){
+        //             res[i] = j-i; // no after temp inc
+        //             break;
+        //         }
+        //     }
+        // }
+        // return res;
+    }
+}
