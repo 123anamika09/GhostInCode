@@ -1,0 +1,24 @@
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        //  It helps us avoid special cases, especially when deleting the first node (head) --> dummy node
+        // placed before the head:- dummy
+        // ListNode dummy = new ListNode(0);
+        // dummy.next = head;
+        ListNode slow = head;
+        ListNode fast = head;
+        for(int i = 0;i<n;i++){
+            fast = fast.next;
+        }
+        if(fast==null) return head.next; // delete 1st element
+        //  also  by using dummy node 
+        while(  fast!=null  && fast.next!=null ){
+            slow = slow.next;
+            fast = fast.next;
+        } 
+        if(slow!=null && slow.next!=null)
+        slow.next = slow.next.next;
+        return head;
+
+    }
+}
