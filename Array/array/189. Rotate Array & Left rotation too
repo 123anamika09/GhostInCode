@@ -1,0 +1,39 @@
+class Solution {
+
+
+           
+
+
+    public void swap(int[] arr, int start, int end){
+        while(start<end){
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+                          // left rotation code
+
+    // public void rotate(int[] arr, int k) {
+    //     // if(k>n) like  k = 7 but arr has 4 element so it creates arrayOutOfBoundIndex Error
+    //     int n = arr.length;
+    //     k = k%n;
+    //       swap(arr,0,k-1); // first k
+    //       swap(arr,k,n-1); // rest 
+    //       swap(arr,0,n-1); // whole
+
+
+
+    // --------------------------------------------right rotation-----------------------------------
+             public void rotate(int[] arr, int k) {
+          int n = arr.length;
+         k = k%n;
+          swap(arr,0,n-1); // whoole
+          swap(arr,0,k-1); // 1dt k
+          swap(arr,k,n-1); // left 
+
+
+    }
+}
