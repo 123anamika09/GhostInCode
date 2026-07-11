@@ -1,0 +1,77 @@
+class Solution {
+    public void sortColors(int[] nums) {
+
+        //  o(n^2)
+        // for(int i = 0;i<nums.length;i++){
+        //     for(int j = i+1;j<nums.length;j++){
+        //         if(nums[i]>nums[j]){
+        //             int temp = nums[i];
+        //             nums[i] = nums[j];
+        //             nums[j] = temp;
+        //         }
+        //     }
+        // } 
+               
+//  ---------------------------------------- Brute force algo------------------
+// int count0 = 0;
+// int count1=0;
+// int count2 = 0;
+//         for(int i = 0;i<nums.length;i++){
+//             if(nums[i] == 0) {
+//                 count0++;
+//             }else if(nums[i] == 1) count1++;
+//             else count2++;
+//         }
+//         int idx = 0;
+//         for(int i = 0;i<count0;i++){
+//             nums[idx] = 0;
+//             idx++;
+//         }
+//         for(int i = 0;i<count1;i++){
+//             nums[idx] = 1;
+//             idx++;
+//         }
+//         for(int i = 0;i<count2;i++){
+//             nums[idx] =2;
+//             idx++;
+//         }
+
+            //    Dutch  national flag algortihm o(n) & o(1)
+// : Could you come up with a one-pass algorithm using only constant extra space?
+        //   3 pointer 
+        // lowe pointer ,  mid pointer, high pointer  
+        // 0 - 0 to low-1  store 
+        // 1 - low to mid-1
+        // 2 - high+1 to n-1 
+
+        //  mid to high -- ?? here unsorted part store  but when mid == high it means it is sorted & then the gap goes empty 
+
+        //  sorted part increases & unsorted part shirnk
+        // nums[mid] = 0 , nums[mid ] =1 , nums[mid] =2 
+
+        //   case 1----nums[mid] = 0 , then swap (nums[low], nums[mid]) low++, mid++ swapping k krn mid always comes 1 so we do mid++
+        // case 2----nums[mid] = 1 , then  mid++
+        // case 1----nums[mid] = 2 , then swap (nums[high], nums[mid]) high-- here mid pr unsorted eement aayega
+        int low = 0;
+        int mid = 0;
+        int high = nums.length -1 ;
+        while(mid<= high){
+            if(nums[mid] == 0){
+                int temp = nums[mid];
+                nums[mid] = nums[low];
+                nums[low] =  temp;
+                low++;
+                mid++; 
+            } else if(nums[mid ] == 1){
+                mid++;
+            }else {
+                int temp = nums[high];
+                nums[high] = nums[mid];
+                nums[mid] = temp;
+                high --;
+            }
+        }
+
+
+    }
+}
